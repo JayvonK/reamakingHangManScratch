@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+    color: red;
+}
+
+.center {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.txtCenter {
+    text-align: center;
+}

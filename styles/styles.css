@@ -1,0 +1,12 @@
+.txtCenter {
+    text-align: center;
+}
+
+.btnWidth {
+    width: 150px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}

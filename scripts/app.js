@@ -57,29 +57,33 @@ const UpdateGame = () => {
 
 userInput.addEventListener('keydown', function(e){
 
-    if(e.key === 'enter'){
-        if(randomWord.includes(userInput.value)){
+    let guess = userInput.value.toLowerCase()
+    if(e.key === 'Enter'){
+        if(randomWord.includes(guess)){
             for(let i = 0; i < randomWord.length; i++){
                 if(randomWord[i] === userInput.value){
-                    displayedWord[i] = userInput;
+                    displayedWord[i] = guess;
                 }
             }
         } else {
             guesses++;
-            wrongGuess += userInput.value;
+            wrongGuess += guess;
             wrongGuesses.innerText = wrongGuess;
         }
 
         UpdateGame();
         EndGame();
+        userInput.value = "";
     }
 })
 
 const EndGame = () => {
     if(randomWord === displayedWord.join("")){
-        alert("YOU have won");
+        alert("YOU have won because you guessed the word " + randomWord + " correctly");
+        RestartGame();
     }else if (maxGusses === guesses){
-        alert("YOU lose");
+        alert("YOU lose because you failed to guess the word " + randomWord);
+        RestartGame();
     }
 }
 

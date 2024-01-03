@@ -19,7 +19,7 @@ restartBtn.addEventListener('click', function(e){
     RestartGame();
 })
 
-restartBtn.addEventListener('click', function(e){
+const RestartGame = () => {
     guesses = 0;
     maxGusses = 5;
     randomWord = "";
@@ -29,14 +29,58 @@ restartBtn.addEventListener('click', function(e){
     userInput.value = "";
     userInput.readOnly = true;
     wrongGuesses.innerText = "Wrong Guesses";
-    secretWord.innerText = "[Secret Word]";
-})
+    secretWord.innerText = "[Secret Word]";    
+}
 
 async function ApiCall() {
     const promise = await fetch('https://random-word-api.herokuapp.com/word')
     const data = await promise.json();
 
     StartGame(data[0]);
+}
+
+const StartGame = word => {
+    randomWord = word;
+
+    for(let i = 0; i < randomWord.length; i++){
+        displayedWord.push("_");
+    }
+
+    UpdateGame();
+    userInput.readOnly = false;
+}
+
+const UpdateGame = () => {
+    secretWord.innerText = displayedWord.join(" ");
+    hangMan.innerText = `You have ${guesses} / ${maxGusses} guesses left`;
+}
+
+userInput.addEventListener('keydown', function(e){
+
+    if(e.key === 'enter'){
+        if(randomWord.includes(userInput.value)){
+            for(let i = 0; i < randomWord.length; i++){
+                if(randomWord[i] === userInput.value){
+                    displayedWord[i] = userInput;
+                }
+            }
+        } else {
+            guesses++;
+            wrongGuess += userInput.value;
+            wrongGuesses.innerText = wrongGuess;
+        }
+
+        UpdateGame();
+        EndGame();
+    }
+})
+
+const EndGame = () => {
+    if(randomWord === displayedWord.join("")){
+        alert("YOU have won");
+    }else if (maxGusses === guesses){
+        alert("YOU lose");
+    }
 }
 
 

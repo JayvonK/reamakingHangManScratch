@@ -15,22 +15,21 @@
         <h1 class="txtCenter">Welcome To Hangman!</h1>
 
         <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
-            <button class="btn btn-primary btnWidth" id="startBtn">Start</button>
-            <button class="btn btn-danger btnWidth" id="restartBtn">Restart</button>
+            <div class="col center">
+                <button class="btn btn-primary btnWidth" id="startBtn">Start</button>
+
             </div>
-            <div class="col-4"></div>   
+            <div class="col center">
+                <button class="btn btn-danger btnWidth" id="restartBtn">Restart</button>
+            </div>
         </div>
 
         <h3 id="secretWord">[Secret Word]</h3>
         <h3 id="wrongGuesses">Wrong Guesses</h3>
-
-
-
-
+        <input type="text" name="" id="userInput" placeholder="Enter a letter" maxlength="1" readonly>
+        <h3 class="center" id="hangMan">Guesses Left / Max Guesses</h3>
     </div>
-    
+
 
 
 

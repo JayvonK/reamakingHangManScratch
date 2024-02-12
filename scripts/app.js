@@ -27,6 +27,10 @@ resetBtn.addEventListener('click', () => {
     ResetGame();
 })
 
+userInput.addEventListener('keydown', () => {
+    UpdateGame();
+})
+
 const StartGame = async () => {
     if (start) {
         await GetWord();
@@ -44,6 +48,6 @@ const ResetGame = () => {
 
 const UpdateGame = () => {
     for(let i = 0; i < word.length; i++){
-        
+        if(i)
     }
 }

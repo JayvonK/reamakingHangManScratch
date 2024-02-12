@@ -6,6 +6,7 @@ let wrongGuesses = document.getElementById("wrongGuesses");
 let hangMan = document.getElementById("hangMan");
 let userInput = document.getElementById("userInput");
 
+let wrongGuess = [];
 let display = [];
 let word = "";
 let guesses = 0;
@@ -27,8 +28,11 @@ resetBtn.addEventListener('click', () => {
     ResetGame();
 })
 
-userInput.addEventListener('keydown', () => {
-    UpdateGame();
+userInput.addEventListener('keydown', (e) => {
+    if (e.key === "Enter") {
+        UpdateGame(e.target.value);
+        userInput.value = "";
+    }
 })
 
 const StartGame = async () => {
@@ -43,11 +47,42 @@ const StartGame = async () => {
 }
 
 const ResetGame = () => {
-
+    secretWord.textContent = "[Secret Word]";
+    hangMan.textContent = "Guesses / Guesses Left";
+    wrongGuess = [];
+    display = [];
+    word = "";
+    guesses = 0;
+    start = true;
+    userInput.readOnly = true;
+    wrongGuesses.text = "Wrong Guesses";
 }
 
-const UpdateGame = () => {
-    for(let i = 0; i < word.length; i++){
-        if(i)
+const UpdateGame = (letter) => {
+    if (word.includes(letter)) {
+        for (let i = 0; i < word.length; i++) {
+            if (word[i] === letter) {
+                display[i] = letter;
+            }
+        }
+        secretWord.textContent = display.join(" ");
+    } else {
+        guesses++;
+        hangMan.textContent = `Guesses: ${guesses} / ${guessesLeft}`;
+        if (!wrongGuess.includes(letter)) {
+            wrongGuess.push(letter);
+            wrongGuesses.textContent = wrongGuess.join(",");
+        }
+    }
+    EndGame();
+}
+
+const EndGame = () => {
+    if(guesses === guessesLeft){
+        alert(`YOU HAVE LOST, correct word: ${word}`);
+        ResetGame();
+    } else if (display.join("") === word){
+        alert("YOU WIN!!!!");
+        ResetGame();
     }
 }

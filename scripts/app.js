@@ -1,4 +1,3 @@
-// 'https://random-word-api.herokuapp.com/word'
 let startBtn = document.getElementById("startBtn");
 let resetBtn = document.getElementById("resetBtn");
 let secretWord = document.getElementById("secretWord");
@@ -55,7 +54,7 @@ const ResetGame = () => {
     guesses = 0;
     start = true;
     userInput.readOnly = true;
-    wrongGuesses.text = "Wrong Guesses";
+    wrongGuesses.textContent = "Wrong Guesses";
 }
 
 const UpdateGame = (letter) => {
